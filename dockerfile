@@ -4,14 +4,8 @@ FROM gradle:7.6.1-jdk11
 # this sets the working directory in the container
 WORKDIR /app
 
-# These copy the necessary files into the working directory of container for the build process
-COPY gradlew gradlew.bat gradle.properties build.gradle /app/
-
-# copy the entire gradle folder into src
-COPY gradle /app/gradle
-
-# copy the application source code
-COPY src /app/src
+# copy literally every file into container
+COPY . .
 
 # Give execution permission to gradle wrapper
 RUN chmod +x /app/gradlew
@@ -20,6 +14,4 @@ RUN chmod +x /app/gradlew
 EXPOSE 8080
 
 # start application 
-CMD ["./gradlew", "appRun", "--continuous"]
-
-
+CMD ["./gradlew", "apprun", "--continuous"]
