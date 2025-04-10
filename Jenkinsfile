@@ -15,7 +15,7 @@ pipeline {
       steps{
         script{
           echo "Building Docker Container of Gradle App..."
-          sh "docker build -t $DOCKER_IMAGE"
+          sh "docker build -t $DOCKER_IMAGE ." 
         }
       }
     }
