@@ -6,7 +6,7 @@ pipeline {
   agent any
 
    environment {
-    DOCKER_IMAGE = "https://hub.docker.com/r/fahmisar/ensf-400-term-project:latest"
+    DOCKER_IMAGE = 'fahmisar/ensf-400-term-project:latest'
    }
 
   stages {
