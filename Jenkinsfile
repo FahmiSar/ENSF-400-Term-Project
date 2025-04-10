@@ -33,6 +33,30 @@ pipeline {
       }
     }
 
+    // run the tests which require connection to a
+    // running database.
+    stage('Database Tests') {
+      steps {
+        sh './gradlew integrate'
+      }
+      post {
+        always {
+          script {
+            // Find the test result files
+            def results = findFiles(glob: 'build/test-results/integrate/*.xml')
+            
+            // If test result files are found, publish them
+            if (results.length > 0) {
+              junit 'build/test-results/integrate/*.xml'
+            } else {
+              // Log a message if no test result files are found
+              echo 'No integration test result files found. Skipping JUnit publishing.'
+            }
+          }
+        }
+      }
+    }
+
     // These are the Behavior Driven Development (BDD) tests
     // See the files in src/bdd_test
     // These tests do not require a running system.
