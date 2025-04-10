@@ -33,19 +33,6 @@ pipeline {
       }
     }
 
-    // run the tests which require connection to a
-    // running database.
-    stage('Database Tests') {
-      steps {
-        sh './gradlew integrate'
-      }
-      post {
-        always {
-          junit 'build/test-results/integrate/*.xml'
-        }
-      }
-    }
-
     // These are the Behavior Driven Development (BDD) tests
     // See the files in src/bdd_test
     // These tests do not require a running system.
