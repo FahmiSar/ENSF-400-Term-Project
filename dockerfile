@@ -1,17 +1,28 @@
-# use the gradle with jdk 11 image as the base
-FROM gradle:7.6.1-jdk11
+# Use the official Gradle image with JDK 11 as the base image
+FROM gradle:7.6.1-jdk11  
 
-# this sets the working directory in the container
-WORKDIR /app
+# Set the working directory inside the container  
+WORKDIR /desktop_app  
 
-# copy literally every file into container
-COPY . .
+# Copy the Gradle build script into the container  
+COPY build.gradle ./  
 
-# Give execution permission to gradle wrapper
-RUN chmod +x /app/gradlew
+# Copy the Gradle wrapper scripts into the container  
+COPY gradlew gradlew.bat ./  
 
-# this tells docker that the container listens on port 8080
-EXPOSE 8080
+# Copy the Gradle folder containing wrapper files  
+COPY gradle ./gradle  
 
-# start application 
-CMD ["./gradlew", "apprun", "--continuous"]
+# Copy all other project files into the container  
+COPY . .  
+
+# Give execution permission to the Gradle wrapper script  
+RUN chmod +x ./gradlew  
+
+# Expose port 8080 for external access to the application  
+EXPOSE 8080  
+
+# Start the application using the Gradle wrapper,  
+# with "--continuous" to automatically rebuild on file changes  
+CMD ["./gradlew", "appRun", "--continuous"] 
+#Fixing appRun because gradle is case sensitive 
