@@ -21,7 +21,7 @@ plugins {
     id "org.flywaydb.flyway" version "6.0.8"
 
     // scans our code for static analysis
-    id "org.sonarqube" version "3.3"
+    id "org.sonarqube" version "3.0"
 
     // provides unit test coverage
     id 'jacoco'
@@ -266,8 +266,8 @@ check.dependsOn(jacocoTestReport)
 
 sonarqube {
     properties {
-        property "sonar.projectKey", "ENSF-400-Term-Project"
-        property "sonar.projectName", "ENSF-400-Term-Project"
+        property "sonar.projectKey", "$projectname"
+        property "sonar.projectName", "$projectname"
         property "sonar.projectDescription", "A demonstration of a web application with good test coverage and best practices"
         property "sonar.sources", "src/main/java"
         property "sonar.tests", "src/test/java,src/integration_test/java,src/bdd_test/java"

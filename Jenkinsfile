@@ -32,14 +32,6 @@ pipeline {
         }
       }
     }
-      stage('Debug') {
-        steps {
-            script {
-                echo "SONAR_TOKEN: ${env.SONAR_TOKEN}"
-            }
-        }
-      }
-
 
     // Stage 3: Run SonarQube Static Analysis
     stage('SonarQube Analysis') {
@@ -47,7 +39,7 @@ pipeline {
             script {
               echo "Running SonarQube Static Analysis..."
               // Run SonarQube analysis using Gradle with Sonar plugin
-              sh """./gradlew sonarqube -Dsonar.login=${SONAR_TOKEN} -Dsonar.host.url=http://localhost:9000"""
+              sh """./gradlew sonarqube -Dsonar.login=${SONAR_TOKEN}"""
             }
         }
         post {
