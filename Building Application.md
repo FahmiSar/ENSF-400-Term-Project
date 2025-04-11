@@ -22,6 +22,6 @@ append ```/demo``` in order to visit the actual gradle application
 1. If prompted to login as an admin use 
 ```docker compose logs jenkins``` to find the inital one-time use admin password. If prompted to login use 
 ``` 
-    username: ensf401    or     username: ensf400
-    password: ensf401           password: ensf400
+    username: ensf400
+    password: ensf400
 ```
