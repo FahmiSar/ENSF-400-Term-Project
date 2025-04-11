@@ -274,7 +274,7 @@ sonarqube {
         property "sonar.java.binaries", "build/classes/java/main"
         property "sonar.junit.reportPaths", "build/test-results/test/,build/test-results/integrate"
         property "sonar.coverage.jacoco.xmlReportPaths", "build/jacoco/jacoco.xml"
-        property "sonar.token", "sqp_f1b05043d70ef8adf91a3f0514923ff8cecb72aa"
+        property "sonar.token", "$SONAR_TOKEN"
     }
 }
 
