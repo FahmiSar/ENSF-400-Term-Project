@@ -35,26 +35,28 @@ pipeline {
 
     // Stage 3: Run SonarQube Static Analysis
     stage('SonarQube Analysis') {
-        steps {
-            script {
-              echo "Running SonarQube Static Analysis..."
-              // Run SonarQube analysis using Gradle with Sonar plugin
-              withCredentials([string(credentialsId: 'SONAR_TOKEN', variable: 'SONAR_TOKEN')]) {
-                  sh '''
-                      ./gradlew sonarqube \
-                        -Dsonar.login=$SONAR_TOKEN \
-                        -Dsonar.host.url=http://host.docker.internal:9000
-                  '''
-              }
-            }
-        }
-        post {
-          always {
-            echo "SonarQube Analysis completed."
+      steps {
+        script {
+          echo "Running SonarQube Static Analysis..."
+          withCredentials([string(credentialsId: 'SONAR_TOKEN', variable: 'SONAR_TOKEN')]) {
+            // Either single-line:
+            sh "./gradlew sonarqube -Dsonar.login=$SONAR_TOKEN -Dsonar.host.url=http://host.docker.internal:9000"
+
+            // OR multiline with double-quotes for interpolation:
+            // sh """
+            //   ./gradlew sonarqube \
+            //     -Dsonar.login=$SONAR_TOKEN \
+            //     -Dsonar.host.url=http://host.docker.internal:9000
+            // """
           }
         }
-    }    
-
+      }
+      post {
+        always {
+          echo "SonarQube Analysis completed."
+        }
+      }
+    }
   }
 }
 
