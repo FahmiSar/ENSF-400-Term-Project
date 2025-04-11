@@ -266,15 +266,15 @@ check.dependsOn(jacocoTestReport)
 
 sonarqube {
     properties {
-        property "sonar.projectKey", "ENSF-400-Term-Project"
-        property "sonar.projectName", "ENSF-400-Term-Project"
+        property "sonar.projectKey", "$projectname"
+        property "sonar.projectName", "$projectname"
         property "sonar.projectDescription", "A demonstration of a web application with good test coverage and best practices"
         property "sonar.sources", "src/main/java"
         property "sonar.tests", "src/test/java,src/integration_test/java,src/bdd_test/java"
         property "sonar.java.binaries", "build/classes/java/main"
         property "sonar.junit.reportPaths", "build/test-results/test/,build/test-results/integrate"
         property "sonar.coverage.jacoco.xmlReportPaths", "build/jacoco/jacoco.xml"
-        property "sonar.token", System.getenv("SONAR_TOKEN")
+        property "sonar.token", "sqp_f1b05043d70ef8adf91a3f0514923ff8cecb72aa"
     }
 }
 
