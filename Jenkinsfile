@@ -39,7 +39,7 @@ pipeline {
             script {
               echo "Running SonarQube Static Analysis..."
               // Run SonarQube analysis using Gradle with Sonar plugin
-              sh "./gradlew sonarqube -Dsonar.login=${SONAR_TOKEN}"
+              sh """./gradlew sonarqube -Dsonar.login=${SONAR_TOKEN}"""
             }
         }
         post {
