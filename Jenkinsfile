@@ -32,6 +32,14 @@ pipeline {
         }
       }
     }
+      stage('Debug') {
+        steps {
+            script {
+                echo "SONAR_TOKEN: ${env.SONAR_TOKEN}"
+            }
+        }
+      }
+
 
     // Stage 3: Run SonarQube Static Analysis
     stage('SonarQube Analysis') {
