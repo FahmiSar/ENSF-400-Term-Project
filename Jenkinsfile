@@ -7,6 +7,7 @@ pipeline {
 
    environment {
     DOCKER_IMAGE = 'fahmisar/ensf-400-term-project:latest'
+    SONAR_TOKEN = credentials('SONAR_TOKEN')
    }
 
   stages {
@@ -33,7 +34,20 @@ pipeline {
     }
 
     // Stage 3: Run SonarQube Static Analysis
-
+    stage('SonarQube Analysis') {
+        steps {
+            script {
+              echo "Running SonarQube Static Analysis..."
+              // Run SonarQube analysis using Gradle with Sonar plugin
+              sh './gradlew sonarqube -Dsonar.login=$SONAR_TOKEN'
+            }
+        }
+        post {
+          always {
+            echo "SonarQube Analysis completed."
+          }
+        }
+    }    
 
   }
 }
