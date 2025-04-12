@@ -31,6 +31,16 @@ append ```/demo``` in order to visit the actual gradle application
     username: hisada
     password: hisadavi
 ```
+1. For SonarQube
+```enter admin for username, admn for password``` for the inital one-time use admin password. If prompted to login use 
+``` 
+    signup:
+    
+    login:
+
+    username: admin
+    password: Group15_test
+```
 
 ## Contributions:
 1. Syed Danial Farrukh: Worked on SonarQube stage implementation
