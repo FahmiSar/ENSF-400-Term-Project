@@ -275,7 +275,7 @@ sonarqube {
         property "sonar.junit.reportPaths", "build/test-results/test/,build/test-results/integrate"
         property "sonar.coverage.jacoco.xmlReportPaths", "build/jacoco/jacoco.xml"
         property "sonar.host.url", "http://172.17.0.1:9000/"
-        property "sonar.login", "sqa_6cddbc325c9065f60c0677fc3aa2f110d8bbfeb9"
+        property "sonar.login", "d4898d039a38ed9dbdb37b9ec6ee0871250ffccc"
     }
 }
 
