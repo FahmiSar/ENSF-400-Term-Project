@@ -10,7 +10,7 @@ pipeline {
         HTTP_PROXY = 'http://127.0.0.1:9888'
         // Default Java Home for Jenkins (JDK 17)
         JAVA_HOME = '/opt/java/11.0.14'
-        PATH = "${JAVA_HOME}/bin:${PATH}"
+        PATH = "${JAVA_HOME}/bin:${env.PATH}"
    }
 
   stages {
@@ -21,7 +21,7 @@ pipeline {
       environment {
         // Override JAVA_HOME to use JDK 11 for this stage
         JAVA_HOME = '/opt/java/11.0.14'
-        PATH = "${JAVA_HOME}/bin:${PATH}"
+        PATH = "${JAVA_HOME}/bin:${env.PATH}"
       }
       steps {
         sh './gradlew clean assemble'
@@ -34,7 +34,7 @@ pipeline {
       environment {
         // Override JAVA_HOME to use JDK 11 for this stage
         JAVA_HOME = '/opt/java/11.0.14'
-        PATH = "${JAVA_HOME}/bin:${PATH}"
+        PATH = "${JAVA_HOME}/bin:${env.PATH}"
       }
       steps {
         sh './gradlew test'
@@ -52,7 +52,7 @@ pipeline {
       environment {
         // Override JAVA_HOME to use JDK 11 for this stage
         JAVA_HOME = '/opt/java/11.0.14'
-        PATH = "${JAVA_HOME}/bin:${PATH}"
+        PATH = "${JAVA_HOME}/bin:${env.PATH}"
       }
       steps {
         sh './gradlew integrate'
@@ -71,7 +71,7 @@ pipeline {
       environment {
         // Override JAVA_HOME to use JDK 11 for this stage
         JAVA_HOME = '/opt/java/11.0.14'
-        PATH = "${JAVA_HOME}/bin:${PATH}"
+        PATH = "${JAVA_HOME}/bin:${env.PATH}"
       }
       steps {
         sh './gradlew generateCucumberReports'
@@ -91,7 +91,7 @@ pipeline {
         environment {
           // Override JAVA_HOME to use JDK 11 for this stage
           JAVA_HOME = '/opt/java/11.0.14'
-          PATH = "${JAVA_HOME}/bin:${PATH}"
+          PATH = "${JAVA_HOME}/bin:${env.PATH}"
         }      
       
       steps{
