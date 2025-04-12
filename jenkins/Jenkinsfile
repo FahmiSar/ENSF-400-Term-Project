@@ -6,17 +6,17 @@ pipeline {
         }
     }
     stages {
-        stage('Install Pipenv') {
+        stage('Install Pipenv for Python') {
             steps {
                 sh 'apt-get update && apt-get install -y python3-pip && pip3 install pipenv'
             }
         }
-        stage('Build') {
+        stage('Build Java') {
             steps {
                 sh './gradlew clean assemble'
             }
         }
-        stage('Unit Tests') {
+        stage('Java Unit Tests') {
             steps {
                 sh './gradlew test'
             }
@@ -27,7 +27,7 @@ pipeline {
                 }
             }
         }
-        stage('Static Analysis') {
+        stage('SonarQube Analysis') {
             steps {
                 withSonarQubeEnv('sonarqube') {
                     // Run SonarQube analysis
@@ -41,114 +41,7 @@ pipeline {
                     }
                 }       
             }
-        } 
-        /*stage('Database Tests') {
-            steps {
-                sh './gradlew integrate'
-            }
-            post {
-                always {
-                    junit 'build/test-results/integrate/*.xml'
-                }
-            }
-        }*/
-        // stage('BDD Tests') {
-        //     steps {
-        //         sh './gradlew generateCucumberReports'
-        //         sh './gradlew jacocoTestReport'
-        //     }
-        //     post {
-        //         always {
-        //             junit 'build/test-results/bdd/*.xml'
-        //         }
-        //     }
-        // }
-        // stage('API Tests') {
-        //     steps {
-        //         sh './gradlew runApiTests'
-        //     }
-        //     post {
-        //         always {
-        //             junit 'build/test-results/api_tests/*.xml'
-        //         }
-        //     }
-        // }
-        // stage('UI BDD Tests') {
-        //     steps {
-        //         sh './gradlew runBehaveTests'
-        //         sh './gradlew generateCucumberReport'
-        //     }
-        //     post {
-        //         always {
-        //             junit 'build/test-results/bdd_ui/*.xml'
-        //         }
-        //     }
-        // }
-        // stage('Deploy to Test') {
-        //     steps {
-        //         sh './gradlew deployToTestWindowsLocal'
-        //         sh 'PIPENV_IGNORE_VIRTUALENVS=1 pipenv install'
-        //         sh './gradlew waitForHeartBeat'
-        //         sh 'curl http://zap/JSON/core/action/newSession -s --proxy https://urban-enigma-5w5v96pjvr5h7x4j-9888.app.github.dev'
-        //     }
-        // }
-        // stage('UI Tests') {
-        //     steps {
-        //         sh 'chmod +x src/ui_tests/java/gradlew'
-        //         sh 'cd src/ui_tests/java && ./gradlew clean test'
-        //     }
-        //     post {
-        //         always {
-        //             junit 'src/ui_tests/java/build/test-results/test/*.xml'
-        //         }
-        //     }
-        // }
-        // stage('Security: Dependency Analysis') {
-        //     steps {
-        //         sh './gradlew dependencyCheckAnalyze'
-        //         dependencyCheckPublisher pattern: 'build/reports/dependency-check-report.xml'
-        //     }
-        // }
-        // stage('Performance Tests') {
-        //     steps {
-        //         sh './gradlew runPerfTests'
-        //         perfReport 'build/reports/jmeter/results.jtl'
-        //     }
-        // }
-        // stage('Mutation Tests') {
-        //     steps {
-        //         sh './gradlew pitest'
-        //     }
-        // }
-        // stage('Build Documentation') {
-        //     steps {
-        //         sh './gradlew javadoc'
-        //         archiveArtifacts artifacts: 'build/docs/javadoc/**/*', fingerprint: true
-        //     }
-        // }
-        // stage('Collect Zap Security Report') {
-        //     steps {
-        //         sh 'mkdir -p build/reports/zap'
-        //         sh 'curl http://zap/OTHER/core/other/htmlreport --proxy localhost:9888 > build/reports/zap/zap_report.html'
-        //         archiveArtifacts artifacts: 'build/reports/zap/zap_report.html'
-        //     }
-        // }
-        // stage('Docker Build') {
-        //     steps {
-        //         script {
-        //             // Get the latest Git commit hash
-        //             def commitHash = sh(script: 'git rev-parse --short HEAD', returnStdout: true).trim()
-        
-        //             // Build the Docker image with the commit hash as the tag
-        //             docker.build("/my-gradle-app:${commitHash}")
-        
-        //             // Push the image to Docker Hub
-        //             docker.withRegistry('https://registry.hub.docker.com', 'dockerhub-creds') {
-        //                 docker.image("/my-gradle-app:${commitHash}").push()
-        //             }
-        //         }
-        //     }
-        // }
+        }
     }
 
     post {
