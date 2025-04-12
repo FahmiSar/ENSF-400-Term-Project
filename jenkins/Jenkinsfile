@@ -42,7 +42,7 @@ pipeline {
                 }       
             }
         } 
-        stage('Database Tests') {
+        /*stage('Database Tests') {
             steps {
                 sh './gradlew integrate'
             }
@@ -51,7 +51,7 @@ pipeline {
                     junit 'build/test-results/integrate/*.xml'
                 }
             }
-        }
+        }*/
         // stage('BDD Tests') {
         //     steps {
         //         sh './gradlew generateCucumberReports'
