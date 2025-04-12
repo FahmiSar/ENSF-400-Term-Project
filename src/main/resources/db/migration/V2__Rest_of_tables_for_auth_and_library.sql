@@ -1,6 +1,6 @@
 -- eh, instead of one table for both librarians and borrowers,
 -- we'll create a borrower table for borrowers and a
--- separate auth.USER table for librarians
+-- separate auth."USER" table for librarians
 drop table library.person;
 
 -- here's our borrower table
@@ -25,7 +25,7 @@ create table library.LOAN (
 
 -- this holds the list of librarians, mainly their name and their
 -- password hash (used during authentication)
-create table auth.USER (
+create table auth."USER" (
     id serial PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
     password_hash VARCHAR(100)

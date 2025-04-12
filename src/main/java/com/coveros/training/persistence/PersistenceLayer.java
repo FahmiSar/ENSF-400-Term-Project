@@ -449,8 +449,8 @@ public class PersistenceLayer implements IPersistenceLayer {
     public long saveNewUser(String username) {
         CheckUtils.StringMustNotBeNullOrEmpty(username);
         return executeInsertTemplate(
-                "Creates a new user in the database",
-                "INSERT INTO auth.user (name) VALUES (?);", username);
+                "Creates a new \"user\" in the database",
+                "INSERT INTO auth.\"user\" (name) VALUES (?);", username);
     }
 
 
@@ -463,8 +463,8 @@ public class PersistenceLayer implements IPersistenceLayer {
         });
 
         return runQuery(new SqlData<>(
-                "search for a user by id, return that user if found, otherwise return an empty user",
-                "SELECT id  FROM auth.user WHERE name = ?;",
+                "search for a \"user\" by id, return that \"user\" if found, otherwise return an empty \"user\"",
+                "SELECT id  FROM auth.\"user\" WHERE name = ?;",
                 extractor, username));
     }
 
@@ -479,8 +479,8 @@ public class PersistenceLayer implements IPersistenceLayer {
 
         final String hexHash = createHashedValueFromPassword(password);
         return runQuery(new SqlData<>(
-                "check to see if the credentials for a user are valid",
-                "SELECT id FROM auth.user WHERE name = ? AND password_hash = ?;",
+                "check to see if the credentials for a \"user\" are valid",
+                "SELECT id FROM auth.\"user\" WHERE name = ? AND password_hash = ?;",
                 extractor, username, hexHash));
     }
 
@@ -490,15 +490,15 @@ public class PersistenceLayer implements IPersistenceLayer {
         CheckUtils.IntParameterMustBePositive(id);
         String hashedPassword = createHashedValueFromPassword(password);
         executeUpdateTemplate(
-                "Updates the user's password field with a new hash",
-                "UPDATE auth.user SET password_hash = ? WHERE id = ?;", hashedPassword, id);
+                "Updates the \"user\"'s password field with a new hash",
+                "UPDATE auth.\"\"user\"\" SET password_hash = ? WHERE id = ?;", hashedPassword, id);
     }
 
 
     /**
      * Given a password (for example, "password123"), return a
      * hash of that.
-     * @param password a user's password
+     * @param password a \"user\"'s password
      * @return a hash of the password value.  a one-way function that returns a unique value,
      *          but different than the original, cannot be converted back to its original value.
      */
