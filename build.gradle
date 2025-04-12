@@ -274,7 +274,8 @@ sonarqube {
         property "sonar.java.binaries", "build/classes/java/main"
         property "sonar.junit.reportPaths", "build/test-results/test/,build/test-results/integrate"
         property "sonar.coverage.jacoco.xmlReportPaths", "build/jacoco/jacoco.xml"
-        property "sonar.login", System.getenv("SONAR_TOKEN")
+        property "sonar.host.url", "http://172.17.0.1:9000/"
+        property "sonar.login", "sqp_50cd88c65f217140d2df638d88590da032b52ce3"
     }
 }
 
@@ -381,7 +382,7 @@ compileJava.finalizedBy writeGitCommitToFile
 static void checkIfAlive() {
     int code
     try {
-        URL url = new URL("http://localhost:8080/demo")
+        URL url = new URL("https://reimagined-dollop-jjjv7gp6xgw5cjj5r.github.dev/api/qualitygates/project_status?projectKey=Demo")
         HttpURLConnection connection = (HttpURLConnection) url.openConnection()
         connection.setRequestMethod("GET")
         connection.connect()
@@ -413,7 +414,7 @@ void waitForHeartbeat() {
     int code = 0
     while (code != 200){
         try {
-            URL url = new URL("http://localhost:8080/demo")
+            URL url = new URL("https://reimagined-dollop-jjjv7gp6xgw5cjj5r.github.dev/api/qualitygates/project_status?projectKey=Demo")
             HttpURLConnection connection = (HttpURLConnection) url.openConnection()
             connection.setRequestMethod("GET")
             connection.connect()
@@ -449,7 +450,7 @@ task checkQualityGate() {
 
 // throws an exception if the quality gate fails.
 static void isQualityGateGood() {
-    URL url = new URL("http://localhost:9000/api/qualitygates/project_status?projectKey=Demo")
+    URL url = new URL("https://reimagined-dollop-jjjv7gp6xgw5cjj5r.github.dev/api/qualitygates/project_status?projectKey=Demo")
     HttpURLConnection connection = (HttpURLConnection) url.openConnection()
     connection.setRequestMethod("GET")
     connection.connect()
